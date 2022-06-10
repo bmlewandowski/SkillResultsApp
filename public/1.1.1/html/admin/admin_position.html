@@ -1,0 +1,141 @@
+<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_admin.html'"></div>
+
+<div class="layout_main_admin">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+
+            <div class="layout_full_title">Position</div>
+
+            <div class="layout_full_text">View details of the position and add the required skills and education</div>
+
+            <div style="clear:both;height:20px;"></div>
+                        
+            <div style="float:right">
+                <a href="/admineditposition/{{position.id}}" title="Edit Position">
+                    <div class="admin_users_button">EDIT DETAILS</div>
+                </a>
+            </div>
+            
+            <!--Position Details-->
+            <div>
+                <strong>{{position.name}}</strong>
+            </div>
+            <p>{{position.description}}</p>
+            
+            <div style="clear:both;height:20px;"></div> 
+            
+            <span style="font-size:14px;">EDUCATION</span>
+            <div style="float:right">
+                <a href="/adminaddpositoneducation/{{position.id}}" title="Edit Education">
+                    <div class="admin_users_button">ADD EDUCATION</div>
+                </a>          
+            </div>
+            
+            <!--Education Table Grid-->
+            <table class="user_skill_table" style="width:500px;">
+                <tr>
+                    <td class="user_skill_th"></td>
+                    <td class="user_skill_th">Degree Level</td>
+                    <td class="user_skill_th">Degree Type</td>
+                </tr>
+
+                <tr ng-repeat="(key,value) in positioneducations">
+                    <td class="user_skill_tr"><div class="user_skill_editbutton" ng-click="showConfirmEducation(value.id)">X</div></td> 
+                    <td class="user_skill_tr">{{value.degreeLevel}}</td>
+                    <td class="user_skill_tr">{{value.degreeType}}</td>             
+                </tr>
+
+            </table>            
+
+            <div style="clear:both;height:20px;"></div>
+            
+            <span style="font-size:14px;">SKILLS</span>
+            <div style="float:right;margin-bottom:10px;">
+                <a href="/adminaddpostionskills/{{position.id}}" title="Edit Skills">
+                    <div class="admin_users_button">ADD SKILLS</div>
+                </a>          
+            </div>
+            
+                <!--Skill Table Grid-->
+                <table class="user_skill_table">
+                    <tr>
+                        <td class="user_skill_th"></td>                        
+                        <td class="user_skill_th"></td>
+                        <td class="user_skill_th">Skill Name</td>
+                        <td class="user_skill_th">Proficiency</td>
+                        <td class="user_skill_th">Priority</td>
+                        <td class="user_skill_th">Created</td>
+                        <td class="user_skill_th">Modified</td>
+                    </tr>
+
+                    <tr ng-repeat="(key,value) in positionskills" ng-style="ratingstyle(value)">
+                        <td class="user_skill_tr">
+                            <div class="user_skill_editbutton" ng-click="showConfirmSkill(value.pskId)">X</div>
+                        </td>
+                        <td class="user_skill_tr">
+                            <a href="/admineditpositionskill/{{value.id}}/{{value.type}}" title="Edit Skill">
+                                <div class="user_skill_editbutton">EDIT</div>
+                            </a>
+                        </td>
+                        <td class="user_skill_tr">{{value.name}}</td>
+                        <td class="user_skill_tr">{{value.rating}}</td>
+                        <td class="user_skill_tr">{{value.priority}}</td>                        
+                        <td class="user_skill_tr">{{value.created | date:"MM/dd/yyyy"}}</td>
+                        <td class="user_skill_tr">{{value.modified | date:"MM/dd/yyyy"}}</td>
+                    </tr>
+
+                </table>          
+                        
+            <div style="clear:both;height:20px;"></div>
+            
+            <span style="font-size:14px;">DUTIES</span>
+            <div style="float:right;margin-bottom:10px;">
+                <a href="/adminaddpositionduty/{{position.id}}" title="Edit Duties">
+                    <div class="admin_users_button">ADD DUTIES</div>
+                </a>          
+            </div>
+            
+                <!--Duties Table Grid-->
+                <table class="user_skill_table">
+                    <tr>
+                        <td class="user_skill_th"></td>
+                        <td class="user_skill_th"></td>
+                        <td class="user_skill_th">Name</td>
+                        <td class="user_skill_th">Description</td>
+                        <td class="user_skill_th">Created</td>
+                        <td class="user_skill_th">Modified</td>
+                    </tr>
+
+
+                    <tr ng-repeat="(key,value) in positionduties" ng-style="ratingstyle(value)">
+                        <td class="user_skill_tr">
+                            <div class="user_skill_editbutton" ng-click="showConfirmDuty(value.id)">X</div>
+                        </td>
+                        <td class="user_skill_tr">
+                            <a href="/admineditpositionduty/{{value.id}}/{{value.type}}" title="Edit Duty">
+                                <div class="user_skill_editbutton">EDIT</div>
+                            </a>
+                        </td>
+                        <td class="user_skill_tr">{{value.name}}</td>
+                        <td class="user_skill_tr">{{value.description}}</td>                      
+                        <td class="user_skill_tr">{{value.created | date:"MM/dd/yyyy"}}</td>
+                        <td class="user_skill_tr">{{value.modified | date:"MM/dd/yyyy"}}</td>
+                    </tr>
+
+                </table> 
+       
+        </div>
+
+    </div>
+
+    <div style="clear:both; height:50px;"></div>
+
+
+
+</div>
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

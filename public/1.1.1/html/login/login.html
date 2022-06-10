@@ -1,0 +1,116 @@
+<!--Landing Header -->
+<div ng-include="'/1.1.1/html/components/landing_header.html'"></div>
+
+<div class="layout_main">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+            <div class="layout_full_title">Login</div>
+
+            <div class="layout_full_text">
+                Logging into SkillResults is quick and easy, It does not rely on passwords or complex PIN codes.
+                All you need to do to login is enter your work email address and we will send you a Secure Login Link.
+            </div>
+
+            <!--LOGIN FORM AREA-->
+            <div ng-show="state.mode == 'login'">
+
+                <div style="width:500px; margin-top: 50px; margin-left:auto; margin-right:auto;">
+
+                    <form name="loginEmailForm" ng-submit="loginemail()">
+
+                        <div style="margin-bottom:20px;">
+                            <div class="tooltip">
+                                <img src="/1.1.1/img/icon_info.png" style="width:15px;vertical-align:middle;">
+                                <span class="tooltiptext">If you are already a registered user on SkillResults, a Secure Login Link will be sent right to your inbox. Just enter your email address here and click the LOGIN button.</span>
+                            </div>
+                            Enter your email and click login:
+                        </div>
+
+                        <!--EMAIL INPUT-->
+                        <md-input-container style="width:500px;">
+                            <label>Email</label>
+                            <input ng-model="loginemail.email" type="email" required>
+                        </md-input-container>
+
+
+                        <div style="width:155px; margin-left: auto; margin-right: auto;">
+                            <md-button type="submit" id="registerUser" value="GET SKILLRESULTS!" class="md-raised md-primary" aria-label="login" ng-disabled="login.loginForm.$invalid()">
+                                GET LOGIN LINK
+                            </md-button>
+                        </div>
+
+                        <!--Link to Register Area-->
+                        <div style="width:300px; margin-top: 50px; margin-left: auto; margin-right: auto;">
+                            <a class="form_message" href="/register/trial" title="Click to Register">Want to try for free? Register Here</a>
+                        </div>
+
+                        <span class="form_validation_error">{{form.error}}</span>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <!--LOADING AREA-->
+            <div ng-show="state.mode == 'working'">
+
+                <div class="registration_title" style="text-align: center; margin-top: 50px;">
+                    Ok! Sending you a login link now...
+                </div>
+
+                <div style="text-align: center;">
+
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+
+                </div>
+
+                <div style="text-align: center; font-size: 25px;">
+                    {{state.status}}
+                </div>
+
+            </div>
+
+            <!--LINK SENT AREA-->
+            <div ng-show="state.mode == 'sent'">
+
+                <div class="registration_title" style="text-align: center; margin-top: 50px;">
+                    Congrats!
+                    <br>
+                    Your login link has been sent to your email.
+                </div>
+
+
+
+                <!--DELETE THIS FOR PRODUTION: TEMP LINK AREA -->
+                <div style="margin-top:50px; width:700px;color:red;">
+
+                    Pre-Launch Development Link:<br /><br />
+
+                    <a ng-href="{{secureloginlink}}">{{secureloginlink}}</a>
+
+                    <br /><br />
+
+                    NOTE: This will be removed in production environments and moved to strictly email.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div style="clear:both; height:50px;"></div>
+</div>
+
+<!--Landing Footer-->
+<div ng-include="'/1.1.1/html/components/landing_footer.html'"></div>

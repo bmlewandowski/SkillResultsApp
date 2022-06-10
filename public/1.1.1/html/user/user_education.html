@@ -1,0 +1,116 @@
+﻿<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_user.html'"></div>
+
+<div class="layout_main">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full" ng-cloak>
+
+            <div class="layout_full_title">Education</div>
+
+            <div class="layout_full_text">From this area, you can manage all of your professional credentials including your formal degrees, training, certificates, and licenses! You can also add any professional awards or achievments.</div>
+
+            <div style="clear: both;">
+
+
+                <md-tabs md-selected="currenttab" md-dynamic-height md-border-bottom>
+
+                    <!--AREA - SHOW DEGREES AREA-->
+                    <md-tab label="ACADEMIC DEGREES">
+
+                        <!--TAB TITLE AREA-->
+                        <div style="font-size:24px; margin-bottom: 10px; margin-top: 20px;">ACADEMIC DEGREES</div>
+                        <div style="font-size:14px; margin-bottom: 30px;">If you have a degree or degrees from a higher education or academic institution, you can list it here. Most higher eduction institutions are allready pre-loaded, so just pick your college or institution and add your degree!</div>
+
+                        <!--ADD DEGREE BUTTON-->
+                        <a href="/adddegree/">
+                            <div class="user_skill_addbutton">+Add ACADEMIC DEGREE</div>
+                        </a>
+                        <div style="height:50px;"></div>
+
+                        <!--Education Table Grid-->
+                        <table class="user_skill_table">
+                            <tr>
+                                <td class="user_skill_th">Institution</td>
+                                <td class="user_skill_th">Degree Level</td>
+                                <td class="user_skill_th">Degree Type</td>
+                                <td class="user_skill_th">Completed</td>
+                            </tr>
+
+                            <tr ng-repeat="(key,value) in usereducations">
+                                <td class="user_skill_tr">{{value.institution}}</td>
+                                <td class="user_skill_tr">{{value.degreelevel}}</td>
+                                <td class="user_skill_tr">{{value.degreetype}}</td>
+                                <td class="user_skill_tr">{{value.completedate | date:"MM/dd/yyyy"}}</td>
+                            </tr>
+                        </table>
+
+                    </md-tab>
+
+                    <!--AREA - UPLOAD USERS-->
+                    <md-tab label="CERTIFICATIONS & LICENCES">
+
+                        <!--TAB TITLE AREA-->
+                        <div style="font-size:24px; margin-bottom: 10px; margin-top: 20px;">CERTIFICATIONS &amp; LICENSES</div>
+                        <div style="font-size:14px; margin-bottom: 30px;">Add past and present certifications and licenses that you have acquired from granting bodies.</div>
+
+                        <!--ADD DEGREE BUTTON-->
+                        <a href="/addcertification/">
+                            <div class="user_skill_addbutton">+Add CERTIFICATION/LICENSE</div>
+                        </a>
+                        <div style="height:50px;"></div>
+                        
+                        <!--Certification Table Grid-->
+                        <table class="user_skill_table">
+                            <tr>
+                                <td class="user_skill_th">Certification</td>
+                                <td class="user_skill_th">Date</td>
+                            </tr>
+
+                            <tr ng-repeat="(key,value) in usercerts">
+                                <td class="user_skill_tr">{{value.name}}</td>
+                                <td class="user_skill_tr">{{value.date | date:"MM/dd/yyyy"}}</td>
+                            </tr>
+                        </table>
+
+                    </md-tab>
+
+                    <!--AREA THREE-->
+                    <md-tab label="PROFESSIONAL TRAINING">
+
+                        <!--TAB TITLE AREA-->
+                        <div style="font-size:24px; margin-bottom: 10px; margin-top: 20px;">PROFESSIONAL TRAINING</div>
+                        <div style="font-size:14px; margin-bottom: 30px;">List your professional traning that help strengthen your abilities.</div>
+
+
+                        COMING SOON...
+
+                    </md-tab>
+
+                    <!--AREA THREE-->
+                    <md-tab label="AWARDS & ACCOLADES">
+
+                        <!--TAB TITLE AREA-->
+                        <div style="font-size:24px; margin-bottom: 10px; margin-top: 20px;">AWARDS &amp; ACCOLADES</div>
+                        <div style="font-size:14px; margin-bottom: 30px;">Record your awards and accolades to keep track of your achievements and recognition.</div>
+
+                        COMING SOON!
+
+                    </md-tab>
+
+                </md-tabs>
+
+            </div>
+
+        </div>
+
+        <div style="clear:both; height:50px;"></div>
+
+    </div>
+
+</div>
+
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

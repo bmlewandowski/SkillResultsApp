@@ -1,0 +1,68 @@
+<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_user.html'"></div>
+
+<div class="layout_main">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+            <div class="layout_full_title">Skill Wishlist</div>
+            <div class="layout_full_text">So what skills do you want to learn? Maybe sharpen up a skill you already have? Just enter whatever you want to learn here</div>
+            <div style="clear: both"></div>
+
+            <div style="float:right;width:600px;">
+
+                <a href="/addwishlists/" title="Add to Wishlist">
+                    <div class="user_skill_addbutton">Add to Wishlist</div>
+                </a>
+                
+                <div style="height:50px;"></div>
+
+                <!--Skill Table Grid-->
+                <table class="user_skill_table">
+                    <tr>
+                        <td class="user_skill_th"></td>
+                        <td class="user_skill_th">Skill Name</td>
+                        <td class="user_skill_th">Proficiency</td>
+                        <td class="user_skill_th">Priority</td>
+                        <td class="user_skill_th">Created</td>
+                        <td class="user_skill_th">Modified</td>
+                    </tr>
+
+                    <tr ng-repeat="(key,value) in userskills" ng-style="ratingstyle(value)">
+                        <td class="user_skill_tr"><a href="/editwishlist/{{value.id}}/{{value.type}}" title="Edit Wishlist">
+                            <div class="user_skill_editbutton">EDIT</div>
+                            </a>
+                        </td>
+                        <td class="user_skill_tr">{{value.name}}</td>
+                        <td class="user_skill_tr">{{value.rating}}</td>
+                        <td class="user_skill_tr">{{value.priority}}</td>                        
+                        <td class="user_skill_tr">{{value.created | date:"MM/dd/yyyy"}}</td>
+                        <td class="user_skill_tr">{{value.modified | date:"MM/dd/yyyy"}}</td>
+                    </tr>
+
+                </table>
+                
+                <div style="float:right;font-size:12px;font-style:italic;color:#46AD42;">
+                    <img src="/1.1.1/img/icon_csv.png" alt="Download as CSV" ng-click="downloadcsv()" style="width:50px;vertical-align:middle;cursor:pointer"/>
+                download as .csv
+                </div>
+                <div style="clear:both;height:10px;"></div> 
+                
+            </div>
+            
+            <img src="/1.1.1/img/user-home/wishlistbanner.png" style="width:250px; float:left; margin-left:30px;">
+
+            <div style="clear: both"></div>
+        </div>
+
+    </div>
+
+    <div style="clear:both; height:50px;"></div>
+
+</div>
+
+
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

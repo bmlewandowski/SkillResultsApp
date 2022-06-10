@@ -1,0 +1,49 @@
+<!--Landing Header -->
+<div ng-include="'/1.1.1/html/components/landing_header.html'"></div>
+
+<div class="layout_main">
+    <div class="layout_wrapper">
+        <div class="layout_full">
+            <div class="layout_full_title" ng-hide="authfailed.show">Authorizing...</div>
+            <div class="layout_full_title" ng-show="authfailed.show">Invalid Request<img src="/1.1.1/img/icon_invalid.png" style="width:50px;vertical-align:middle;margin-left:20px;" alt="Invalid Link"></div>
+            <div class="layout_full_text"></div>
+
+            <div style="clear:both;padding-bottom: 30px;"></div>
+
+            <div style="margin-left:250px;">
+
+                <div ng-hide="authfailed.show" style="">
+                    <p>Authorizing your <em>Secure Login Link</em> now. Please wait! </p>
+                    
+                    <div style="clear:both;padding-bottom: 0px;"></div>
+                    
+                    <div style="margin-right:250px;">
+                        <div class="spinner">
+                            <div class="rect1"></div>
+                            <div class="rect2"></div>
+                            <div class="rect3"></div>
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+                        </div>
+                    </div>         
+                </div>
+                
+                <div ng-show="authfailed.show" style="">
+                    <p>Your <em>Secure Login Link</em> is invalid or has expired.</p> 
+                    
+                    <p>Login <a href="/login/" title="Login"><strong>HERE</strong></a> to get a new one sent to your inbox.<p>
+                    
+                    <p>You can delete the previous email with this link because it is no longer valid. The new one you'll recieve from requesting login will be you new key. You can always return to login and request a new key sent which will mark all previous ones invalid.</p>
+                    
+                    
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div style="clear:both; height:50px;"></div>
+</div>
+
+<!--Landing Footer-->
+<div ng-include="'/1.1.1/html/components/landing_footer.html'"></div>

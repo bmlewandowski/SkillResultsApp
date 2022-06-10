@@ -1,0 +1,242 @@
+<!--Landing Header -->
+<div ng-include="'/1.1.1/html/components/landing_header.html'"></div>
+
+<div class="layout_main">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+
+            <div ng-show="state.mode == 'register'">
+
+                <div class="registration_title">
+                    Awesome! Let's get started!
+                </div>
+                
+                <p>To discuss pricing, see a demo, or get a free trial, contact us directly.</p>
+                <p>We're excited to show you how SkillResults can help your organization.</p>
+                <p><a href="mailto:admin@skillresults.com">admin@skillresults.com</a></p>
+
+                <form ng-submit="submit()" id="payment-form" hidden>
+
+                    <div class="registration_left">
+
+                        <div class="registration_subtitle">First, Let's select a payment plan:</div>
+
+                        <!--Free Plan-->
+                        <div ng-click="selectpayment('skillresultsfree')" ng-class="{registration_plan_wrapperselected : registrationdata.priceplan == 'skillresultsfree', registration_plan_wrapper : registrationdata.priceplan !== 'skillresultsfree'}">
+                            <div class="registration_plan_checkbox">
+                                <div ng-switch="registrationdata.priceplan">
+                                    <img class="registration_plan_box" ng-switch-when="skillresultsfree" src="/1.1.1/img/registration/box_checked.png">
+                                    <img class="registration_plan_box" ng-switch-default src="/1.1.1/img/registration/box_unchecked.png">
+                                </div>
+                            </div>
+                            <div class="registration_plan_titlebox">
+                                <div class="registration_plan_title">Free Trial</div>
+                                <div class="registration_plan_subtitle">Up to 10 Users - $0.00 / Monthly - No Credit Card Needed</div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+                        <!--Professional Monthly Plan-->
+                        <div ng-click="selectpayment('skillresultsprom')" ng-class="{registration_plan_wrapperselected : registrationdata.priceplan == 'skillresultsprom', registration_plan_wrapper : registrationdata.priceplan !== 'skillresultsprom'}">
+                            <div class="registration_plan_checkbox">
+                                <div ng-switch="registrationdata.priceplan">
+                                    <img class="registration_plan_box" ng-switch-when="skillresultsprom" src="/1.1.1/img/registration/box_checked.png">
+                                    <img class="registration_plan_box" ng-switch-default src="/1.1.1/img/registration/box_unchecked.png">
+                                </div>
+                            </div>
+                            <div class="registration_plan_titlebox">
+                                <div class="registration_plan_title">Professional ($99 Monthly)</div>
+                                <div class="registration_plan_subtitle">Up to 100 Users - $99.00 billed once per month</div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+                        <!--Professional Annual Plan-->
+                        <div ng-click="selectpayment('skillresultsproy')" ng-class="{registration_plan_wrapperselected : registrationdata.priceplan == 'skillresultsproy', registration_plan_wrapper : registrationdata.priceplan !== 'skillresultsproy'}">
+                            <div class="registration_plan_checkbox">
+                                <div ng-switch="registrationdata.priceplan">
+                                    <img class="registration_plan_box" ng-switch-when="skillresultsproy" src="/1.1.1/img/registration/box_checked.png">
+                                    <img class="registration_plan_box" ng-switch-default src="/1.1.1/img/registration/box_unchecked.png">
+                                </div>
+                            </div>
+                            <div class="registration_plan_titlebox">
+                                <div class="registration_plan_title">Professional ($1,188 Annual)</div>
+                                <div class="registration_plan_subtitle">Up to 100 Users - $1,188.00 Billed once per year</div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+                        <!--Enterprise Monthly Plan-->
+                        <div ng-click="selectpayment('skillresultsentm')" ng-class="{registration_plan_wrapperselected : registrationdata.priceplan == 'skillresultsentm', registration_plan_wrapper : registrationdata.priceplan !== 'skillresultsentm'}">
+                            <div class="registration_plan_checkbox">
+                                <div ng-switch="registrationdata.priceplan">
+                                    <img class="registration_plan_box" ng-switch-when="skillresultsentm" src="/1.1.1/img/registration/box_checked.png">
+                                    <img class="registration_plan_box" ng-switch-default src="/1.1.1/img/registration/box_unchecked.png">
+                                </div>
+                            </div>
+                            <div class="registration_plan_titlebox">
+                                <div class="registration_plan_title">Enterprise ($249 Monthly)</div>
+                                <div class="registration_plan_subtitle">Up to 500 Users - $249.00 billed once per month</div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+                        <!--Enterprise Annual Plan-->
+                        <div ng-click="selectpayment('skillresultsenty')" ng-class="{registration_plan_wrapperselected : registrationdata.priceplan == 'skillresultsenty', registration_plan_wrapper : registrationdata.priceplan !== 'skillresultsenty'}">
+                            <div class="registration_plan_checkbox">
+                                <div ng-switch="registrationdata.priceplan">
+                                    <img class="registration_plan_box" ng-switch-when="skillresultsenty" src="/1.1.1/img/registration/box_checked.png">
+                                    <img class="registration_plan_box" ng-switch-default src="/1.1.1/img/registration/box_unchecked.png">
+                                </div>
+                            </div>
+                            <div class="registration_plan_titlebox">
+                                <div class="registration_plan_title">Enterprise ($2,988 Annual)</div>
+                                <div class="registration_plan_subtitle">Up to 500 Users - $2,988.00 Billed once per year</div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+                        <div style="font-size: 16px; margin: 20px; text-align: center;">
+                            <div class="tooltip">
+                                <img src="/1.1.1/img/icon_info.png" style="width:15px;vertical-align:middle;">
+                                <span class="tooltiptext">We can work accomidate special subscription plans for larger enterprise needs.</span>
+                            </div>
+                            500+ Users? <a href="https://www.skillresults.com/contact/" title="Contact">Contact</a> us for custom quote!
+                        </div>
+
+                    </div>
+
+                    <div class="registration_right">
+
+                        <div class="registration_subtitle">Next, a little info about you...</div>
+
+                        <!--EMAIL INPUT-->
+                        <md-input-container style="width:420px">
+                            <label>Email</label>
+                            <input ng-model="registrationdata.email" type="email" required>
+                        </md-input-container>
+
+                        <!--ORG NAME INPUT-->
+                        <md-input-container style="width:420px">
+                            <label>Name of Business or Organization</label>
+                            <input ng-model="registrationdata.organizationname" required>
+                        </md-input-container>
+
+                        <!--ORG ADDRESS INPUT-->
+                        <md-input-container style="width:420px">
+                            <label>Address of Business or Organization</label>
+                            <input ng-model="registrationdata.organizationaddress">
+                        </md-input-container>
+
+                        <!--CITY INPUT-->
+                        <md-input-container style="width:150px">
+                            <label>City</label>
+                            <input ng-model="registrationdata.organizationcity">
+                        </md-input-container>
+
+                        <!--DROP DOWN-->
+                        <md-input-container style="min-height: 55px; width:150px;">
+                            <label>State</label>
+                            <md-select ng-model="registrationdata.organizationstate">
+                                <md-option ng-repeat="state in states" value="{{state.abbreviation}}">
+                                    {{state.name}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <!--ZIP INPUT-->
+                        <md-input-container style="width:100px;">
+                            <label>Zip Code</label>
+                            <input name="postalCode" ng-model="registrationdata.organizationzip" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+
+                            <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                                <div ng-message="required" class="my-message">You must supply a postal code.</div>
+                                <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+                                    code.
+                                </div>
+                                <div ng-message="md-maxlength" class="my-message">
+                                    We only need the first 5 digits of the Zip!
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <!--Credit Card Area-->
+                        <div ng-show="registrationdata.priceplan !== 'skillresultsfree'" style="margin-top:5px">
+
+                            <span class="registration_subtitle" style="margin-right:120px;">And Your Card Info:</span>
+
+                            <img src="/1.1.1/img/registration/cardlogos.png" style="width:100px;">
+
+                            <div class="registration_cardarea">
+
+                                <div class="form-row">
+
+                                    <div id="card-element">
+                                        <!-- A Stripe Element will be inserted here. -->
+                                    </div>
+
+                                    <!-- Used to display Stripe Element errors. -->
+                                    <div id="card-errors" role="alert"></div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <span class="form_validation_error">{{form.error}}</span>
+
+                    </div>
+
+                    <div style="clear: both">&nbsp;</div>
+
+                    <div style="margin-top: 0px; text-align: center;">
+
+                        <md-input-container>
+                            <md-button type="submit" id="registerUser" value="GET SKILLRESULTS!" class="md-raised md-primary" aria-label="login" ng-disabled="login.loginForm.$invalid()">
+                                GET SKILLRESULTS!
+                            </md-button>
+                        </md-input-container>
+
+                        <p style="font-size:14px;">By clicking the button to sign up you agree to our <a href="https://skillresults.com/terms/" title="Terms and Conditions" target="_blank">Terms and Conditions</a></p>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div ng-show="state.mode == 'working'">
+
+                <div class="registration_title" style="text-align: center;">
+                    Great! &nbsp; Just setting things up...
+                </div>
+
+                <div style="text-align: center;">
+
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+
+                </div>
+
+                <div style="text-align: center; font-size: 25px;">
+                    {{state.status}}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--Landing Footer-->
+<div ng-include="'/1.1.1/html/components/landing_footer.html'"></div>

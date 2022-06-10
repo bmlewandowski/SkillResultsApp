@@ -1,0 +1,150 @@
+﻿<!--Form Body-->
+<div ng-switch="viewloading">
+
+    <!--Form Data Loading-->
+    <!--This will show while dropdowns are required data is loaded before the user can use the form-->
+    <div ng-switch-when="true">
+
+        <div style="text-align: center;">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
+
+        <div style="text-align:center;margin-top:20px;">
+            Loading...
+        </div>
+
+    </div>
+
+    <!--Form is Ready-->
+    <div ng-switch-when="false">
+
+        <!--TAB TITLE AREA-->
+        <div style="font-size:24px; margin-bottom: 10px; margin-top: 20px;">Let's add your Certification or Licence!</div>
+        <div style="font-size:14px; margin-bottom: 30px;">It's easy to show off all the hours and work. Just start below by filling out the form.</div>
+
+        <form name="forms.certForm">
+
+            <!--STEP ONE-->
+            <div style="float:left; width:200px; margin-left: 20px;">
+                <div style="font-weight:600">STEP ONE:</div>
+                <div style="font-size: 12px;">Search for your Certification</div>
+            </div>
+
+            <div style="float:left; width:500px; margin-left: 20px;">
+
+                <!--Search Certifications-->
+                <md-autocomplete 
+                                 required 
+                                 md-require-match="true" 
+                                 md-no-cache="true" 
+                                 md-floating-label="Search for Your Certification or Licence" 
+                                 md-selected-item="certformData.Cert " 
+                                 md-search-text="searcher" 
+                                 md-search-text-change="clearcustomInstitution()" 
+                                 md-items="certification in certifications  | filter:searcher" 
+                                 md-item-text="certification.name">
+
+                    <md-item-template>
+                        <span md-highlight-text="searcher" md-highlight-flags="i">{{certification.name}}</span>
+                    </md-item-template>
+
+                    <md-not-found>
+                        <span ng-click="selectCustomInstitution();">Not Found! Add a Custom?</span>
+                    </md-not-found>
+
+                </md-autocomplete>
+
+
+                <!--OTHER CERT INPUTS-->
+                <md-input-container 
+                                    style="padding-left:50px; width: 450px" 
+                                    ng-model="certformData.CertOtherName" 
+                                    ng-show="certformData.CertOther">
+                    
+                    <label  style="padding-left:50px; width: 450px">Name of Custom Certification or Licence</label>
+                    
+                    <input ng-model="certformData.CertOtherName">
+                    
+                </md-input-container>
+                
+                
+                <md-input-container 
+                                    style="padding-left:50px; width: 450px" 
+                                    ng-model="certformData.CertOtherDescription" 
+                                    ng-show="certformData.CertOther">
+                    
+                    <label style="padding-left:50px; width: 450px">Description of Custom Certification or Licence</label>
+                    
+                    <input ng-model="certformData.CertOtherDescription">
+                    
+                </md-input-container>
+                
+                <md-input-container 
+                                    style="padding-left:50px; width: 450px" 
+                                    ng-model="certformData.CertOtherAwardedby" 
+                                    ng-show="certformData.CertOther">
+                    
+                    <label  style="padding-left:50px; width: 450px">Who Awarded you this?</label>
+                    
+                    <input ng-model="certformData.CertOtherAwardedby">
+                    
+                </md-input-container>
+
+            </div>
+
+            <div style="float:left; width:100px;margin-left: 20px;">
+
+                &nbsp;
+
+            </div>
+
+            <div style="clear: both;"></div>
+
+            <!--DIVIDER-->
+            <div style="width:840px; height:4px; margin-left: 20px; margin-bottom: 20px; margin-top: 0px; background-color: #d9e9fb;"></div>
+
+            <!--STEP TWO-->
+            <div style="float:left; width:200px; margin-left: 20px;">
+                <div style="font-weight:600">STEP TWO:</div>
+                <div style="font-size: 12px;">Enter the Date of your Certification or Licence</div>
+            </div>
+
+            <div style="float:left; width:300px; margin-left: 20px;">
+
+                <!--DATE INPUT-->
+                <md-input-container>
+                    <label>Date of Certification</label>
+                    <md-datepicker ng-required md-open-on-focus md-hide-icons="calendar" ng-model="certformData.Date" style="min-width:300px;"></md-datepicker>
+                </md-input-container>
+
+            </div>
+
+            <div style="float:left; width:300px;margin-left: 20px;">
+
+                &nbsp;
+
+            </div>
+
+            <div style="clear: both;"></div>
+
+            <!--DIVIDER-->
+            <div style="width:840px; height:4px; margin-left: 20px; margin-bottom: 20px; margin-top: 0px; background-color: #d9e9fb;"></div>
+
+
+
+            <!--Submit Button-->
+            <div style="width:200px; margin-left: auto; margin-right: auto;">
+                <md-button ng-disabled="forms.degreeForm.$invalid" type="submit" ng-click="submitform()" class="md-raised md-primary" style="width: 200px;">SUBMIT</md-button>
+            </div>
+
+
+
+        </form>
+    </div>
+</div>

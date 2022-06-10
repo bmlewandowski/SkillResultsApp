@@ -1,0 +1,75 @@
+<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_admin.html'"></div>
+
+<div class="layout_main_admin">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+
+            <div class="layout_full_title">Position Managment</div>
+
+            <div class="layout_full_text">Welcome to the position managemet area. From here you can create new positons and specify the desired skills and education</div>
+
+
+            <div style="clear: both; height:10px;"></div>
+            
+            <div style="float:right">
+                <a href="/adminaddposition/" title="Add Position">
+                    <div class="admin_users_button">
+                        ADD POSITION
+                    </div>
+                </a>          
+            </div>
+
+            <div style="clear:both; height:20px;"></div>
+
+
+            <!--Skill Table Grid-->
+
+            <table class="user_skill_table">
+
+                <tr>
+                    <td class="user_skill_th"></td>
+                    <td class="user_skill_th">Name</td>
+                    <td class="user_skill_th">Description</td>
+                    <td class="user_skill_th">Reports To</td>
+                    <td class="user_skill_th">Created</td>
+                    <td class="user_skill_th">Modified</td>
+                    
+                </tr>
+
+                <tr ng-repeat="(key,value) in positions">
+                    <td class="user_skill_tr">
+                        <a href="/adminposition/{{value.id}}" title="Edit Position">
+                            <div class="admin_users_button">EDIT</div>
+                        </a>
+                    </td>
+                    <td class="user_skill_tr">{{value.name}}</td>
+                    <td class="user_skill_tr">{{value.description}}</td>
+                    <td class="user_skill_tr">{{value.reportsTo}}</td>                   
+                    <td class="user_skill_tr">{{value.created| date:'MM/dd/yyyy'}}</td>
+                    <td class="user_skill_tr">{{value.modified| date:'MM/dd/yyyy'}}</td>
+
+                </tr>
+
+            </table>
+            
+            <div style="float:right;font-size:12px;font-style:italic;color:#46AD42;">
+                <img src="/1.1.1/img/icon_csv.png" alt="Download as CSV" ng-click="downloadcsv()" style="width:50px;vertical-align:middle;cursor:pointer"/>
+            download as .csv
+            </div> 
+            <div style="clear:both;height:10px;"></div> 
+            
+        </div>
+
+    </div>
+
+    <div style="clear:both; height:50px;"></div>
+
+
+
+</div>
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

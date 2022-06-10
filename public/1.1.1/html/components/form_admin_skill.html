@@ -1,0 +1,28 @@
+﻿<!--FORM AREA-->
+<div class="form_mainarea">
+
+    <!--Skill Name-->
+    <md-input-container class="md-block">
+        <label>Skill Name</label>
+        <input ng-model="skill.name">
+    </md-input-container>
+
+    <!--Skill Description-->
+    <md-input-container class="md-block">
+        <label>Skill Description</label>
+        <textarea ng-model="skill.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+        <md-checkbox ng-model="skill.hidden">
+            Hide this Skill?
+        </md-checkbox>
+    </md-input-container>
+
+    <!--SUBMIT BUTTON-->
+    <div style="margin-left:auto; margin-right:auto; width:300px;">
+        <md-button ng-click="cancel()" class="md-raised md-warn">CANCEL</md-button>
+        <md-button ng-click="submit()" class="md-raised md-primary">SUBMIT</md-button>
+    </div>
+   
+</div>

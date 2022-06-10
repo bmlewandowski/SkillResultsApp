@@ -1,0 +1,112 @@
+﻿<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_user.html'"></div>
+
+<div class="layout_main">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+            <div class="layout_full_title">Test</div>
+            <div class="layout_full_text">This is a test, this is only a test. Remain Calm. I repeat, this is a test, this is only a test.</div>
+            <div style="clear: both"></div>
+
+            <br>
+
+            <md-input-container>
+                <md-button type="submit" id="registerUser" value="GET SKILLRESULTS!" class="md-raised md-primary" aria-label="login" ng-disabled="login.loginForm.$invalid()">
+                    GET SKILLRESULTS!
+                </md-button>
+            </md-input-container>
+
+            <br>
+
+            <!--TEXT INPUT-->
+            <md-input-container>
+                <label>Basic Text</label>
+                <input ng-model="form.text">
+            </md-input-container>
+
+            <!--EMAIL INPUT-->
+            <md-input-container>
+                <label>Email</label>
+                <input ng-model="form.email" type="email">
+            </md-input-container>
+
+            <!--DATE INPUT-->
+            <md-input-container>
+                <label>Date</label>
+                <md-datepicker md-open-on-focus md-hide-icons="calendar" ng-model="form.submissionDate"></md-datepicker>
+            </md-input-container>
+
+            <!--DROP DOWN-->
+            <md-input-container style="min-height: 65px;" flex-gt-sm>
+                <label>State</label>
+                <md-select ng-model="form.state">
+                    <md-option ng-repeat="state in states" value="{{state.abbreviation}}">
+                        {{state.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <!--DISABLED INPUT-->
+            <md-input-container>
+                <label>Disabled (No Click)</label>
+                <input ng-model="form.disabled" disabled>
+            </md-input-container>
+
+            <!--TEXT INPUT (BUT TAKES ENTIRE SPACE-->
+            <md-input-container class="md-block">
+                <label>Basic Text (block style - takes up all available space)</label>
+                <input ng-model="form.text2">
+            </md-input-container>
+
+
+
+            <!--MEMO FIELD-->
+            <md-input-container class="md-block" style>
+                <label>Biography</label>
+                <textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+
+            <!--REQUIRED FEILD WITH VALIDATION AND FEEDBACK-->
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Postal Code</label>
+                <input name="postalCode" ng-model="user.postalCode" placeholder="12345" required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+
+                <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                    <div ng-message="required" class="my-message">You must supply a postal code.</div>
+                    <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+                        code.
+                    </div>
+                    <div ng-message="md-maxlength" class="my-message">
+                        Don't use the long version silly...we don't need to be that specific...
+                    </div>
+                </div>
+            </md-input-container>
+
+
+            <div style="width:200px; height:50px; background-color: #ffebee">'50': 'ffebee'</div>
+            <div style="width:200px; height:50px; background-color: #ffcdd2">'100': 'ffcdd2',</div>
+            <div style="width:200px; height:50px; background-color: #ef9a9a">'200': 'ef9a9a',</div>
+            <div style="width:200px; height:50px; background-color: #e57373">'300': 'e57373',</div>
+            <div style="width:200px; height:50px; background-color: #ef5350">'400': 'ef5350',</div>
+            <div style="width:200px; height:50px; background-color: #f44336">'500': 'f44336',</div>
+            <div style="width:200px; height:50px; background-color: #e53935">'600': 'e53935',</div>
+            <div style="width:200px; height:50px; background-color: #d32f2f">'700': 'd32f2f',</div>
+            <div style="width:200px; height:50px; background-color: #c62828">'800': 'c62828',</div>
+            <div style="width:200px; height:50px; background-color: #b71c1c">'900': 'b71c1c',</div>
+            <div style="width:200px; height:50px; background-color: #ff8a80">'A100': 'ff8a80',</div>
+            <div style="width:200px; height:50px; background-color: #ff5252">'A200': 'ff5252',</div>
+            <div style="width:200px; height:50px; background-color: #ff1744">'A400': 'ff1744',</div>
+            <div style="width:200px; height:50px; background-color: #d50000">'A700': 'd50000',</div>
+
+        </div>
+
+    </div>
+
+    <div style="clear:both; height:50px;"></div>
+
+</div>
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

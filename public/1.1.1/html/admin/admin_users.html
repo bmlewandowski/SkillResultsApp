@@ -1,0 +1,226 @@
+<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_admin.html'"></div>
+
+<div class="layout_main_admin">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+
+            <div class="layout_full_title">User Managment</div>
+
+            <div class="layout_full_text">Welcome to the user managment area. From here you can add new users manually, or upload a user list. Also, enterprise customers can configure single sign on here.</div>
+
+            <div style="clear:both"></div>
+
+            <!--MAIN AREA-->
+            <div>
+
+                <md-tabs md-selected="currenttab" md-dynamic-height md-border-bottom>
+
+                    <!--AREA - SHOW USER LIST-->
+                    <md-tab label="USER LIST">
+
+                        <!--TAB TITLE AREA-->
+                        <div style="font-size:24px; margin-bottom: 10px; margin-top: 20px;">SkillResults User List</div>
+                        <div style="font-size:14px; margin-bottom: 30px;">The List below shows all of the current SkillResults users in your account. If you would like to add a user, just click the "Add New User" button below. You can also go the "Upload Users" above to add users to the system using a spreadsheet template.</div>
+
+                        <!--User Count Summary-->
+                        <div style="float:left;width:250px;font-size:14px; padding:10px;">
+                            <div>Current number of users: {{orgusers.length}}</div>
+                            <div>Maximum users on account: {{userlimit}}</div>
+                        </div>
+
+                        <!--Add New User Button Area-->
+                        <div style="float:right;width:130px; padding:10px;">
+                            <a href="/adminadduser/">
+                                <div class="user_skill_editbutton" style="padding:10px;">+ Add New User</div>
+                            </a>
+                        </div>
+
+                        <!--Add New User Button Area-->
+                        <div style="float:right;width:110px; padding:10px;">
+                            <a ng-click="downloadcsv()">
+                                <div class="user_skill_editbutton" style="padding:10px; background-color:#114d73">Export to CSV</div>
+                            </a>
+                        </div>
+
+                        <!--Skill Table Grid-->
+                        <table class="user_skill_table">
+
+                            <tr>
+                                <td class="user_skill_th">Login Link</td>
+                                <td class="user_skill_th">Email</td>
+                                <td class="user_skill_th">First Name</td>
+                                <td class="user_skill_th">Last Name</td>
+                                <td class="user_skill_th">Reports To</td>
+                                <td class="user_skill_th">Admin</td>
+                                <td class="user_skill_th">Date Added</td>
+                                <td class="user_skill_th">Edit User</td>
+
+                            </tr>
+
+                            <tr ng-repeat="(key,value) in orgusers">
+                                <td class="user_skill_tr">
+                                    <a ng-click="showConfirmSingle(value.userName)">
+                                        <div class="user_skill_editbutton" style="background-color: #26a4fc;">RE-SEND LOGIN LINK</div>
+                                    </a>
+                                </td>
+                                <td class="user_skill_tr">{{value.userName}}</td>
+                                <td class="user_skill_tr">{{value.firstName}}</td>
+                                <td class="user_skill_tr">{{value.lastName}}</td>
+                                <td class="user_skill_tr">{{value.reportsTo}}</td>
+                                <td class="user_skill_tr">
+                                    <span ng-switch="value.admin">
+                                        <span ng-switch-when="0">No</span>
+                                        <span ng-switch-when="1">Yes</span>
+                                        <span ng-switch-when="2">Yes</span>
+                                    </span>
+                                </td>
+                                <td class="user_skill_tr">{{value.created| date:'MM/dd/yyyy'}}</td>
+
+                                <td class="user_skill_tr">
+                                    <a href="/adminedituser/{{value.userId}}" title="Edit User">
+                                        <div class="user_skill_editbutton">EDIT</div>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </md-tab>
+
+                    <!--AREA - UPLOAD USERS-->
+                    <md-tab label="UPLOAD USERS">
+
+                        <!--TAB TITLE AREA-->
+                        <div style="font-size:24px; margin-bottom: 10px; margin-top: 20px;">Upload Users from a Spreadsheet Template</div>
+                        <div style="font-size:14px; margin-bottom: 30px;">To mass upload a list of users, all you have to do is follow this simple three step process below. If you need additional assistance, check out the help <a>here</a></div>
+
+                        <!--STEP ONE-->
+                        <div>
+                            <div style="float:left; text-align: right; width:120px; margin-right: 20px; font-weight: 600">STEP ONE:</div>
+                            <div style="float:left; width:200px;margin-right: 20px; ">
+                                <a href="/1.1.1/files/userimport_template.csv" target="_self" title="User Import Template">
+                                    <div class="user_skill_editbutton" style="padding:10px; width:180px; background-color:#114d73">Download CSV Template</div>
+                                </a>
+                            </div>
+                            <div style="float:left; width:500px; font-size: 12px;">First, click the button to the right to download a CSV Template file. Open the template file in your favorite spreadsheet and add the users email, name and other info as needed. Save your file and go to the next step.</div>
+
+                        </div>
+
+                        <div style="clear:both; height:40px;"></div>
+
+                        <!--STEP TWO-->
+                        <div>
+                            <div style="float:left; text-align: right; width:120px; margin-right: 20px; font-weight: 600">STEP TWO:</div>
+                            <div style="float:left; width:200px;margin-right: 20px; ">
+
+                                <input class="ng-hide" id="csvImport" multiple type="file" ng-model="prd.bulk_direct_file" required accept=".csv" ng-disabled="maxusers()" onchange="angular.element(this).scope().fileloaded()" />
+                                <label for="csvImport" class="user_skill_editbutton" style="padding:10px; width:180px;background-color:#26a4fc;  cursor: pointer; ">Select Populated Template</label>
+
+                            </div>
+                            <div style="float:left; width:500px;  font-size: 12px;">Next, click the button to the right to browse your computer and select the populated template you just made.The system will pull your data into the preview area below.</div>
+
+                        </div>
+
+                        <div style="clear:both; height:40px;"></div>
+
+                        <!--STEP THREE-->
+                        <div>
+                            <div style="float:left; text-align: right; width:120px; margin-right: 20px; font-weight: 600">STEP THREE:</div>
+                            <div style="float:left; width:200px;margin-right: 20px; ">
+
+                                <a ng-click="importusers()">
+                                    <div class="user_skill_editbutton" style="padding:10px; width:180px; background-color:#f0652f">Import Users</div>
+                                </a>
+
+                            </div>
+                            <div style="float:left; width:500px; font-size: 12px;">Finally, Review the Preview Import Grid below and if everything looks ok, click the button to the right to upload your new users to the user list!</div>
+
+                        </div>
+
+                        <div style="clear:both; height:40px;"></div>
+
+                        <!--Skill Table Grid-->
+                        <div ng-show="uploadstatus">
+
+                            <div style="margin-left: 150px; font-size:16px;">Preview Import Data</div>
+                            <table class="user_skill_table" style="margin-left: 150px; width:600px">
+
+                                <tr>
+                                    <td class="user_skill_th">Email</td>
+                                    <td class="user_skill_th">First Name</td>
+                                    <td class="user_skill_th">Last Name</td>
+                                    <td class="user_skill_th">Reports To</td>
+                                </tr>
+
+                                <tr ng-repeat="(key,value) in importedusers">
+                                    <td class="user_skill_tr">{{value.email}}</td>
+                                    <td class="user_skill_tr">{{value.firstname}}</td>
+                                    <td class="user_skill_tr">{{value.lastname}}</td>
+                                    <td class="user_skill_tr">{{value.reportsto}}</td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+
+                    </md-tab>
+
+                    <!--AREA THREE-->
+                    <md-tab label="SINGLE SIGN ON">
+
+                        <!--TAB TITLE AREA-->
+                        <div style="font-size:24px; margin-bottom: 10px; margin-top: 20px;">Single Sign On Setup</div>
+                        <div style="font-size:14px; margin-bottom: 30px;">Single Sign on allows your users to use their existing work accounts to login to SkillResults. Just follow the instructions below to setup single sign on!</div>
+
+                        <div style="width:500px; text-align: center; padding: 20px; border-radius: 20px; background-color:#d9e9fb; margin-left: auto; margin-right: auto;">
+                            <h2 style="">SINGLE SIGN ON COMING SOON!</h2>
+                            <span>We will send out an annoucment as soon as single sign on is ready to go. Thanks for your patience and more great features are on their way (at no additional charge)!</span>
+                        </div>
+
+
+                    </md-tab>
+
+                    <!--AREA THREE-->
+                    <md-tab label="SEND WELCOME EMAIL">
+
+                        <!--TAB TITLE AREA-->
+                        <div style="font-size:24px; margin-bottom: 10px; margin-top: 20px;">Send Everyone the Welcome Email</div>
+                        <div style="font-size:14px; margin-bottom: 30px;">Once you have all of your users setup in the user list, you will want to invite them to start using the system and entering their skills! Use this page to preview the welcome email and to send the email out to everyone.</div>
+
+                        <div style="float:left; margin-left:100px;">
+                            <img src="/1.1.1/img/icon_welcome.png" style="width:400px;">
+                        </div>
+
+                        <div style="float:left; margin-left:50px; width:300px;">
+
+                            <div style="margin-bottom: 20px;">Click the button below when you are ready to send everyone the "Welcome to SkillResults" email!
+                            </div>
+
+                            <div class="button_basic" ng-click="showConfirmAll()">Send All Users Welcome Email</div>
+
+                            <div style="color:#f0652f; font-size: 14px; font-weight: 600; margin-top: 20px;" ng-show="emailAllSuccess">Congrats! Emails were sent out to everyone.</div>
+
+                        </div>
+
+                    </md-tab>
+
+                </md-tabs>
+
+            </div>
+
+            <div style="clear:both;height:10px;"></div>
+
+        </div>
+
+    </div>
+
+    <div style="clear:both;height:50px;"></div>
+
+</div>
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

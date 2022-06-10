@@ -1,0 +1,220 @@
+﻿<!--Form Body-->
+<div ng-switch="viewloading">
+
+    <!--Form Data Loading-->
+    <!--This will show while dropdowns are required data is loaded before the user can use the form-->
+    <div ng-switch-when="true">
+
+        <div style="text-align: center;">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
+
+        <div style="text-align:center;margin-top:20px;">
+            Loading...
+        </div>
+
+    </div>
+
+    <!--Form is Ready-->
+    <div ng-switch-when="false">
+
+        <!--TAB TITLE AREA-->
+        <div style="font-size:24px; margin-bottom: 10px; margin-top: 20px;">Let's add your Degree!</div>
+        <div style="font-size:14px; margin-bottom: 30px;">It's easy to show off all the hours and work that you put into getting that Degree. Just start below by selecting the State that the College, University or School is based out of.</div>
+
+        <form name="forms.degreeForm">
+
+            <!--STEP ONE-->
+            <div style="float:left; width:200px; margin-left: 20px;">
+                <div style="font-weight:600">STEP ONE:</div>
+                <div style="font-size: 12px;">First, select the institution state, and search for the their name.</div>
+            </div>
+
+            <div style="float:left; width:300px; margin-left: 20px;">
+
+                <!--Select State-->
+                <div style="margin-top: 20px;">
+                    <md-input-container style="min-height: 55px; width:300px;">
+                        <label>Select Institution State</label>
+                        <md-select required ng-model="degreeformData.state" ng-change="selectState()">
+                            <md-option ng-repeat="state in states" value="{{state.abbreviation}}">
+                                {{state.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+            </div>
+
+            <div style="float:left; width:300px;margin-left: 20px; margin-top: 20px;">
+
+                <!--Search Institutions-->
+                <md-autocomplete required md-require-match="true" md-no-cache="true" ng-disabled="degreeformState.institution_disabled" md-floating-label="Search for Your Institution Name" md-selected-item="degreeformData.institution" md-search-text="searcher" md-search-text-change="clearcustomInstitution()" md-items="institution in institutions  | filter:searcher" md-item-text="institution.name">
+
+                    <md-item-template>
+                        <span md-highlight-text="searcher" md-highlight-flags="i">{{institution.name}}</span>
+                    </md-item-template>
+
+                    <md-not-found>
+                        <span ng-click="selectCustomInstitution();">Institution Not Found! Add a Custom?</span>
+                    </md-not-found>
+
+                </md-autocomplete>
+
+
+                <!--OTHER INSTITUTION INPUT-->
+                <md-input-container style="width: 300px" ng-model="degreeformData.otherinstitutiondesc" ng-hide="degreeformState.institutionCustom_hidden">
+                    <label>Custom Institution Name</label>
+                    <input ng-model="degreeformData.otherinstitutiondesc">
+                </md-input-container>
+
+            </div>
+
+            <div style="clear: both;"></div>
+
+            <!--DIVIDER-->
+            <div style="width:840px; height:4px; margin-left: 20px; margin-bottom: 20px; margin-top: 0px; background-color: #d9e9fb;"></div>
+
+            <!--STEP TWO-->
+            <div style="float:left; width:200px; margin-left: 20px;">
+                <div style="font-weight:600">STEP TWO:</div>
+                <div style="font-size: 12px;">Select your degree level and then select the type of degree.</div>
+            </div>
+
+            <div style="float:left; width:300px; margin-left: 20px; margin-top: 20px;">
+
+                <!--Degree Level Dropdown-->
+                <md-input-container style="min-height: 55px; width:300px;">
+                    <label>Degree Level</label>
+                    <md-select required id="degreelevelselect" ng-model="degreeformData.degreelevel" ng-change="selectDegreelevel()" aria-label="Degree Level">
+
+                        <md-option ng-value="3">
+                            Associate
+                        </md-option>
+
+                        <md-option ng-value="4">
+                            Bachelor
+                        </md-option>
+
+                        <md-option ng-value="5">
+                            Masters
+                        </md-option>
+
+                        <md-option ng-value="6">
+                            Doctorate
+                        </md-option>
+
+                    </md-select>
+                </md-input-container>
+
+            </div>
+
+            <div style="float:left; width:300px;margin-left: 20px; margin-top: 20px;">
+
+                <!--Degree Type Dropdown-->
+                <md-input-container style="min-height: 55px; width:300px;">
+                    <label>Degree Type</label>
+                    <md-select required ng-model="degreeformData.degreetype" ng-disabled="degreeformState.degreetype_disabled" ng-class="{'md-input-disabled': degreeformState.degreetype_disabled}" aria-label="Degree Type">
+
+                        <md-option ng-repeat="degreetype in degreetypes  | filter: { degreeLevel: degreeformData.degreelevel }" ng-value="degreetype.id">
+                            {{degreetype.name}}
+                        </md-option>
+
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div style="clear: both;"></div>
+
+            <!--DIVIDER-->
+            <div style="width:840px; height:4px; margin-left: 20px; margin-bottom: 20px; background-color: #d9e9fb;"></div>
+
+            <!--STEP THREE-->
+            <div style="float:left; width:200px; margin-left: 20px;">
+                <div style="font-weight:600">STEP THREE (OPTIONAL):</div>
+                <div style="font-size: 12px;">Select your Major and Minor areas of study.</div>
+            </div>
+
+            <div style="float:left; width:300px; margin-left: 20px; margin-top: 20px;">
+
+                <!--Search Majors-->
+                <md-autocomplete md-no-cache="true" md-floating-label="Major Area of Study" md-selected-item="degreeformData.major" md-search-text="formState.major.searchText" md-items="field in fields  | filter:formState.major.searchText" md-item-text="field.name">
+
+                    <md-item-template>
+                        <span md-highlight-text="searchText">{{ field.name }}</span>
+                    </md-item-template>
+
+                    <md-not-found>
+                        No matches found.
+                    </md-not-found>
+
+                </md-autocomplete>
+
+            </div>
+
+            <div style="float:left; width:300px;margin-left: 20px; margin-top: 20px;">
+
+                <!--Search Minors-->
+                <md-autocomplete md-no-cache="true" md-floating-label="Minor Area of Study" md-selected-item="degreeformData.minor" md-search-text="formState.minor.searchText" md-items="field in fields  | filter:formState.minor.searchText" md-item-text="field.name">
+
+                    <md-item-template>
+                        <span md-highlight-text="searchText">{{ field.name }}</span>
+                    </md-item-template>
+
+                    <md-not-found>
+                        No matches found.
+                    </md-not-found>
+
+                </md-autocomplete>
+
+            </div>
+
+            <div style="clear: both;"></div>
+
+            <!--DIVIDER-->
+            <div style="width:800px; height:4px; margin-left: 20px; margin-bottom: 20px; margin-top: 20px; background-color: #d9e9fb;"></div>
+
+            <!--STEP FOUR-->
+            <div style="float:left; width:200px; margin-left: 20px;">
+                <div style="font-weight:600">STEP FOUR:</div>
+                <div style="font-size: 12px;">Enter the date you were awarded your degree or if you are still in school, enter your expected graduation date.</div>
+            </div>
+
+            <div style="float:left; width:300px; margin-left: 20px;">
+
+                <!--Completed Checkbox-->
+                <md-checkbox ng-model="degreeformData.completed">
+                    Academic Requirements Completed
+                </md-checkbox>
+
+            </div>
+
+            <div style="float:left; width:300px;margin-left: 20px; ">
+
+                <!--DATE INPUT-->
+                <md-input-container>
+                    <label>Completion Date</label>
+                    <md-datepicker ng-required md-open-on-focus md-hide-icons="calendar" ng-model="degreeformData.completiondate" style="min-width:300px;"></md-datepicker>
+                </md-input-container>
+
+            </div>
+
+            <div style="clear: both;"></div>
+
+
+            <!--Submit Button-->
+            <div style="width:200px; margin-left: auto; margin-right: auto;">
+                <md-button ng-disabled="forms.degreeForm.$invalid" type="submit" ng-click="submitform()" class="md-raised md-primary" style="width: 200px;">SUBMIT</md-button>
+            </div>
+
+
+
+        </form>
+    </div>
+</div>

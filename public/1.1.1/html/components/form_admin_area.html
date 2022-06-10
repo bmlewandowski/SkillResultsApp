@@ -1,0 +1,29 @@
+﻿<!--FORM AREA-->
+<div class="form_mainarea">
+
+    <!--Area Name-->
+    <md-input-container class="md-block">
+        <label>Area Name</label>
+        <input ng-model="area.name">
+    </md-input-container>
+
+    <!--Area Description-->
+    <md-input-container class="md-block">
+        <label>Area Description</label>
+        <textarea ng-model="area.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+    </md-input-container>
+
+    <!--Area Hidden-->
+    <md-input-container class="md-block">
+        <md-checkbox ng-model="area.hidden">
+            Hide this Area?
+        </md-checkbox>
+    </md-input-container>
+
+    <!--SUBMIT BUTTON-->
+    <div style="margin-left:auto; margin-right:auto; width:300px;">
+        <md-button ng-click="cancel()" class="md-raised md-warn">CANCEL</md-button>
+        <md-button ng-click="submit()" class="md-raised md-primary">SUBMIT</md-button>
+    </div>
+
+</div>

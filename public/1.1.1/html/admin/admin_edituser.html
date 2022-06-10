@@ -1,0 +1,70 @@
+<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_admin.html'"></div>
+
+<div class="layout_main_admin">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+            <div class="layout_full_title">Edit User</div>
+            <div class="layout_full_text">Welcome to the area where you can edit a user. From here you can edit or update user details</div>
+            <div style="clear:both"></div>
+
+            <!--FORM AREA-->
+            <div class="form_mainarea">
+                <form name="editMemberForm" ng-submit="submit()" validate>
+
+                <md-input-container class="md-block">
+                        <strong style="font-size:24px;">{{edituser.email}}</strong>
+                </md-input-container>
+                    
+                <div style="clear:both;height:20px;"></div>
+             
+                <md-input-container class="md-block">
+                        <label>First Name</label>
+                        <input type="text" name="firstName" ng-model="edituser.firstName" />                   
+                </md-input-container>  
+                    
+                <md-input-container class="md-block">
+                        <label>Last Name</label>
+                        <input type="text" name="lastName" ng-model="edituser.lastName" />                  
+                </md-input-container>  
+                    
+                <md-input-container class="md-block">
+                        <label>Reports To (email address)</label>
+                        <input type="email" name="reportsTo" ng-model="edituser.reportsTo" minlength="10" maxlength="128" ng-pattern="/^.+@.+\..+$/" />                  
+                </md-input-container> 
+                    
+                    
+                <md-input-container class="md-block" ng-show="edituser.admin < '2'">
+                    <md-checkbox ng-model="edituser.admin" parse-int ng-true-value="1" ng-false-value="0">
+                        Administrator 
+                        <div class="tooltip">
+                            <img src="/1.1.1/img/icon_info.png" style="width:15px;vertical-align:middle;">
+                            <span class="tooltiptext">This grants a user access to the organization's adminstrative area with all auhtorization.</span>
+                        </div>
+                    </md-checkbox>
+                </md-input-container>
+
+                    
+                <!--SUBMIT BUTTON-->
+                <div style="margin-left:auto; margin-right:auto; width:300px;">
+                    <md-button ng-click="cancel()" class="md-raised md-warn">CANCEL</md-button>
+                    <md-button ng-click="submit()" class="md-raised md-primary" ng-disabled="skill.rating < 1 ">SUBMIT</md-button>
+                </div>
+                
+                    
+                </form>
+            </div>
+               
+
+        </div>
+
+    </div>
+
+    <div style="clear:both; height:50px;"></div>
+
+</div>
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

@@ -1,0 +1,127 @@
+<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_user.html'"></div>
+
+<div class="layout_main">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+
+            <!--Report Body-->
+            <div ng-switch="viewloading">
+
+                <!--Report Parameters Loading-->
+                <div ng-switch-when="true">
+
+                    <div style="text-align:center;margin-top:20px;">
+                       Loading your Report...
+                    </div>
+
+                    <div style="text-align: center;">
+                        <div class="spinner">
+                            <div class="rect1"></div>
+                            <div class="rect2"></div>
+                            <div class="rect3"></div>
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--Report Ready-->
+                <div ng-switch-when="false">
+
+                    <!--Report Header Area-->
+                    <div class="layout_full_title">Users By Skill Report</div>
+                    <div class="layout_full_text">Enter a Skill below and the Report will show everyone that has that skill! This report is useful for finding a skill mentor, or planning some work</div>
+                    <div style="clear: both"></div>
+
+                    <!--Report Parameters Area-->
+                    <form>
+                        <md-autocomplete style="width:400px; display: inline-block;" placeholder="Search for a Skill..." md-no-cache="true" md-selected-item="selectedItem" md-items="skill in skills | filter:searchText" md-search-text="searchText" md-item-text="skill.name">
+
+                            <span md-highlight-text="searchText" md-highlight-flags="i">{{ skill.name }}</span>
+
+                        </md-autocomplete>
+
+                        <md-button class="md-raised md-primary" ng-click="getreportdata(selectedItem.id)">Run Report</md-button>
+                    </form>
+
+                    <!--Report Data Display Area-->
+                    <div ng-switch="reportloading">
+
+                        <!--Report Area Default State-->
+                        <div ng-switch-when="nodata">
+                            <div style="text-align:center;margin-top:40px;">Fill out the Parameters Above and Run the Report.</div>
+                        </div>
+
+                        <!--Report State Loading-->
+                        <div ng-switch-when="loading">
+
+                            <div style="text-align:center;margin-top:50px;">
+                                Getting Report Data...
+                            </div>
+
+                            <div style="text-align:center;">
+
+                                <div class="spinner">
+                                    <div class="rect1"></div>
+                                    <div class="rect2"></div>
+                                    <div class="rect3"></div>
+                                    <div class="rect4"></div>
+                                    <div class="rect5"></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!--Report State Loaded-->
+                        <div ng-switch-when="loaded">
+
+                            <table class="user_skill_table">
+                                <tr>
+                                    <td class="user_skill_th">NAME</td>
+                                    <td class="user_skill_th">EMAIL</td>
+                                    <td class="user_skill_th">RATING</td>
+                                    <td class="user_skill_th">CREATED</td>
+                                    <td class="user_skill_th">MODIFIED</td>
+                                </tr>
+
+                                <tr ng-repeat="value in reportdata">
+                                    <td class="user_skill_tr">{{value.firstName}}&nbsp;{{value.lastName}}</td>
+                                    <td class="user_skill_tr">{{value.email}}</td>
+                                    <td class="user_skill_tr">{{value.rating}}</td>
+                                    <td class="user_skill_tr">{{value.created | date:"MM/dd/yyyy"}}</td>
+                                    <td class="user_skill_tr">{{value.modified | date:"MM/dd/yyyy"}}</td>
+                                </tr>
+
+                            </table>
+                            
+                            <div style="float:right;font-size:12px;font-style:italic;color:#46AD42;">
+                                <img src="/1.1.1/img/icon_csv.png" alt="Download as CSV" ng-click="downloadcsv()" style="width:50px;vertical-align:middle;cursor:pointer"/>
+                            download as .csv
+                            </div>
+                            <div style="clear:both;height:10px;"></div> 
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div style="margin-top:20px;width:600px;margin-left:auto;margin-right:auto;">
+            </div>
+
+        </div>
+
+    </div>
+
+    <div style="clear:both;height:50px;"></div>
+
+</div>
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

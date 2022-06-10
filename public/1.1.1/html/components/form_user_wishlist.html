@@ -1,0 +1,36 @@
+﻿<!--FORM AREA-->
+<div class="form_mainarea">
+
+    <!--Skill Name-->
+    <h2>{{skill.name}}</h2>
+    <p>{{skill.description}}</p>
+
+    <!--Skill Rating-->
+    <h3>Rating</h3>
+    <p>Select proficiency rating (1-100):</p>
+    <md-slider-container>
+        <md-slider aria-label="rating" ng-model="skill.rating" min="0" max="100" step="5" class="md-primary" md-discrete>
+        </md-slider>
+        <md-input-container>
+            <input type="number" ng-model="skill.rating" aria-label="rating" aria-controls="rating" style="width:70px;">
+        </md-input-container>
+    </md-slider-container>
+    
+    <!--Skill Priority-->
+    <h3>Priority</h3>
+    <p>Select skill priority (1-100):</p>
+    <md-slider-container>
+        <md-slider aria-label="priority" ng-model="skill.priority" min="0" max="100" step="5" class="md-primary" md-discrete>
+        </md-slider>
+        <md-input-container>
+            <input type="number" ng-model="skill.priority" aria-label="priority" aria-controls="priority" style="width:70px;">
+        </md-input-container>
+    </md-slider-container>
+
+    <!--SUBMIT BUTTON-->
+    <div style="margin-left:auto; margin-right:auto; width:300px;">
+        <md-button ng-click="cancel()" class="md-raised md-warn">CANCEL</md-button>
+        <md-button ng-click="submit()" class="md-raised md-primary" ng-disabled="skill.rating < 1 ">SUBMIT</md-button>
+    </div>
+
+</div>

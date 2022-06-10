@@ -1,0 +1,67 @@
+﻿<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_admin.html'"></div>
+
+<div class="layout_main_admin">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+            <div class="layout_full_title">Remove Area</div>
+            <div class="layout_full_text">From here you can remove a custom Area that you have added</div>
+            <div style="clear: both"></div>
+
+            <div style="margin-left:auto; margin-right:auto; margin-top:20px; width:800px; text-align:center;">
+
+                <div style="font-size:20px; margin-bottom:50px">
+                    If you would like to remove this custom area permanently, click the button below:
+                </div>
+
+                <div style="margin-bottom:50px; text-align:center;">
+                    <md-button ng-click="delete()" class="md-raised md-primary">DELETE PERMANENTLY</md-button>
+                </div>
+
+                <div style="font-size:16px;  margin-bottom:10px;">
+                    IMPORTANT! This will also delete the following categories & skills that are part of this area:
+                </div>
+
+                <table style="margin-left:200px; text-align:left;">
+
+                    <tbody ng-repeat="category in categories">
+                        <!-- Print the Category -->
+                        <tr>
+
+                            <td width="100px">{{category.id}}</td>
+
+                            <td>{{category.name}}</td>
+
+                            <td>{{category.status}}</td>
+
+                        </tr>
+
+                        <!-- Print the Skills -->
+                        <tr ng-repeat="skill in category.skills">
+
+                            <td width="100px">{{skill.id}}</td>
+
+                            <td>&nbsp; &nbsp; &nbsp; &nbsp;{{skill.name}}</td>
+
+                            <td>{{skill.status}}</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div style="clear:both; height:50px;"></div>
+
+</div>
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

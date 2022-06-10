@@ -1,0 +1,117 @@
+<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_user.html'"></div>
+
+<div class="layout_main">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+            <div class="layout_full_title">Settings</div>
+            <div class="layout_full_text">From Here you can manage your account, reset passwords and change any settings for your SkillResults system. Just navigate to the area bleow to perform any action</div>
+            <div style="clear:both;"></div>
+
+            <md-tabs md-dynamic-height>
+
+                <md-tab label="Account Info">
+
+                    <div class="md-tab-area">
+
+                        <table class="user_settings_table">
+                            <tr class="user_settings_tr">
+                                <td class="user_settings_td">
+                                    Email Address:
+                                </td>
+                                <td class="user_settings_td">
+                                    {{user.userEmail}}
+                                </td>
+                            </tr>
+                            
+                            <tr class="user_settings_tr">
+                                <td class="user_settings_td">
+                                    Name:
+                                </td>
+                                <td class="user_settings_td">
+                                    {{user.firstName}}&nbsp;{{user.lastName}}
+                                </td>
+                            </tr>
+                            
+                            <tr class="user_settings_tr">
+                                <td class="user_settings_td">
+                                    Reports To:
+                                </td>
+                                <td class="user_settings_td">
+                                    {{user.reportsTo}}
+                                </td>
+                            </tr>
+
+                            <tr class="user_settings_tr">
+                                <td class="user_settings_td">
+                                    UserID:
+                                </td>
+                                <td class="user_settings_td">
+                                    {{user.userId}}
+                                </td>
+                            </tr>
+                            
+                            <tr class="user_settings_tr">
+                                <td class="user_settings_td">
+                                    Account Created On:
+                                </td>
+                                <td class="user_settings_td">
+                                    {{user.userCreatedOn | date:"MM/dd/yyyy"}}
+                                </td>
+                            </tr>
+
+                            <tr class="user_settings_tr">
+                                <td class="user_settings_td">
+                                    Administrator:
+                                </td>
+                                <td class="user_settings_td">
+                                    <span ng-switch="user.isAdmin">
+                                        <span ng-switch-when="0">No</span>                            
+                                        <span ng-switch-when="1">Yes</span>                                        
+                                        <span ng-switch-when="2">Yes</span>
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <div class="button_center" ng-click="logout()">LOGOUT</div>
+
+                    </div>
+
+                </md-tab>
+
+                <md-tab label="Settings">
+
+                    <div class="md-tab-area">
+
+                        Personal Settings are coming soon!
+
+                    </div>
+
+                </md-tab>
+
+                <md-tab label="History">
+
+                    <div class="md-tab-area">
+
+                        Personal History is coming soon!
+
+                    </div>
+
+                </md-tab>
+
+            </md-tabs>
+
+        </div>
+
+        <div style="clear:both; height:50px;"></div>
+
+    </div>
+
+</div>
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

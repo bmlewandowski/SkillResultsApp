@@ -1,0 +1,91 @@
+<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_user.html'"></div>
+
+<div class="layout_main">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+
+            <!--Report Parameters Loading-->
+
+            <!--Report Ready-->
+
+                <!--Report Header Area-->
+                <div class="layout_full_title">Skills By Organization Report</div>
+                <div class="layout_full_text">This report will show all of the user skills in your organization</div>
+                <div style="clear: both"></div>
+
+                <!--Report Parameters Area-->
+
+                <!--Report Data Display Area-->
+
+                    <!--Report State Loading-->
+                    <div ng-show="reportloading">
+
+                        <div style="text-align:center;margin-top:50px;">
+                            Getting Report Data...
+                        </div>
+
+                        <div style="text-align:center;">
+
+                            <div class="spinner">
+                                <div class="rect1"></div>
+                                <div class="rect2"></div>
+                                <div class="rect3"></div>
+                                <div class="rect4"></div>
+                                <div class="rect5"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!--Report State Loaded-->
+                    <div ng-hide="reportloading">
+
+                        <table class="user_skill_table">
+                            <tr>
+                                <td class="user_skill_th">SKILL</td>
+                                <td class="user_skill_th">PROFICIENCY</td>
+                                <td class="user_skill_th">EMAIL</td>
+                                <td class="user_skill_th">NAME</td>
+                                <td class="user_skill_th">REPORTS TO</td>
+                                <td class="user_skill_th">CREATED</td>
+                                <td class="user_skill_th">MODIFIED</td>
+                            </tr>
+
+                            <tr ng-repeat="value in reportdata">
+                                <td class="user_skill_tr">{{value.name}}</td>
+                                <td class="user_skill_tr">{{value.rating}}</td>
+                                <td class="user_skill_tr">{{value.email}}</td>
+                                <td class="user_skill_tr">{{value.firstName}}&nbsp;{{value.lastName}}</td>
+                                <td class="user_skill_tr">{{value.reportsTo}}</td>
+                                <td class="user_skill_tr">{{value.created | date:"MM/dd/yyyy"}}</td>
+                                <td class="user_skill_tr">{{value.modified | date:"MM/dd/yyyy"}}</td>
+                            </tr>
+
+                        </table>
+                        
+                        <div style="float:right;font-size:12px;font-style:italic;color:#46AD42;">
+                            <img src="/1.1.1/img/icon_csv.png" alt="Download as CSV" ng-click="downloadcsv()" style="width:50px;vertical-align:middle;cursor:pointer"/>
+                        download as .csv
+                        </div>
+                        <div style="clear:both;height:10px;"></div> 
+                        
+                    </div>
+
+            <div style="margin-top:20px;width:600px;margin-left:auto;margin-right:auto;">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div style="clear:both;height:50px;"></div>
+
+</div>
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

@@ -1,0 +1,66 @@
+<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_user.html'"></div>
+
+<div class="layout_main">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full" ng-cloak>
+
+            <div class="layout_full_title">My Skills</div>
+
+            <div class="layout_full_text">Manage your current skill set by clicking edit or add new skills</div>
+
+            <div style="clear: both; width:600px;">
+
+                <a href="/addskills/" title="Add Skill">
+                    <div class="user_skill_addbutton">Add Skill</div>
+                </a>
+                <div style="height:50px;"></div>
+
+                <!--Skill Table Grid-->
+                <table class="user_skill_table">
+                    <tr>
+                        <td class="user_skill_th"></td>
+                        <td class="user_skill_th">Skill Name</td>
+                        <td class="user_skill_th">Proficiency Rating</td>
+                        <td class="user_skill_th">Created</td>
+                        <td class="user_skill_th">Modified</td>
+                    </tr>
+
+                    <tr ng-repeat="(key,value) in userskills" ng-style="ratingstyle(value)">
+                        <td class="user_skill_tr">
+                            <a href="/editskill/{{value.id}}/{{value.type}}" title="Edit Skill">
+                            <div class="user_skill_editbutton">EDIT</div>
+                            </a>
+                        </td>
+                        <td class="user_skill_tr">{{value.name}}</td>
+                        <td class="user_skill_tr">{{value.rating}}</td>
+                        <td class="user_skill_tr">{{value.created | date:"MM/dd/yyyy"}}</td>
+                        <td class="user_skill_tr">{{value.modified | date:"MM/dd/yyyy"}}</td>
+                    </tr>
+
+                </table>
+                
+                <div style="float:right;font-size:12px;font-style:italic;color:#46AD42;">
+                    <img src="/1.1.1/img/icon_csv.png" alt="Download as CSV" ng-click="downloadcsv()" style="width:50px;vertical-align:middle;cursor:pointer"/>
+                download as .csv
+                </div>
+                <div style="clear:both;height:10px;"></div> 
+                                
+            </div>
+
+            <div style="clear: both"></div>
+
+
+
+        </div>
+
+    </div>
+
+    <div style="clear:both; height:50px;"></div>
+
+</div>
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

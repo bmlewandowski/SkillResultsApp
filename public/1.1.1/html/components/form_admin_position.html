@@ -1,0 +1,22 @@
+<!--FORM AREA-->
+<div class="form_mainarea">
+
+    <!--Position Name-->
+    <md-input-container class="md-block">
+        <label>Position Name</label>
+        <input ng-model="position.name">
+    </md-input-container>
+
+    <!--Position Description-->
+    <md-input-container class="md-block">
+        <label>Position Description</label>
+        <textarea ng-model="position.description" md-maxlength="3000" rows="5" md-select-on-focus></textarea>
+    </md-input-container>
+
+    <!--SUBMIT BUTTON-->
+    <div style="margin-left:auto; margin-right:auto; width:300px;">
+        <md-button ng-click="cancel()" class="md-raised md-warn">CANCEL</md-button>
+        <md-button ng-click="submit()" class="md-raised md-primary">SUBMIT</md-button>
+    </div>
+   
+</div>

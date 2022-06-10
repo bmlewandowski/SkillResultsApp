@@ -1,0 +1,74 @@
+<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_user.html'"></div>
+
+<div class="layout_main">
+
+    <div class="layout_wrapper">
+
+        <div class="layout_full">
+
+            <div class="layout_full_title">Skill Search</div>
+
+            <div class="layout_full_text">Search for Skills across the entrire enterprise or find specific people or teams by name. Just type in what you are looking for</div>
+
+            <div style="clear: both"></div>
+
+            <div class="user_search_area">
+
+                <div layout="column">
+
+                    <input ng-model="searchtext" placeholder="Search...">
+
+                    <div ng-show="searchtext.length > 1">
+
+                        <div ng-repeat="(key,value) in skills | filter:searchtext">
+
+                            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline">{{ value.name }}</span>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-actions layout="row" layout-align="end center">
+                                    <!--<md-button>Search Users</md-button>-->
+                                    <md-button ng-click="addskill(value.id, value.type)">Add This Skill</md-button>
+                                </md-card-actions>
+                            </md-card>
+                        </div>
+
+                        <div ng-repeat="(key,value) in users | filter:searchtext">
+
+                            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline">{{ value.userName }}</span>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-actions layout="row" layout-align="end center">
+                                    <md-button ng-click="viewuser(value.userId)">View User</md-button>
+                                    <!--<md-button>Email User</md-button>&nbsp;&nbsp;-->
+                                    &nbsp;&nbsp;
+                                    <img mat-card-sm-image src="/1.1.1/img/user.png" width="50" />
+                                </md-card-actions>
+                            </md-card>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <img src="/1.1.1/img/user-home/searchbanner.jpg" class="user_search_banner">
+
+        </div>
+
+    </div>
+
+    <div style="clear:both; height:50px;"></div>
+
+</div>
+
+
+
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>

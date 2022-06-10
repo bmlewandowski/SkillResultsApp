@@ -1,0 +1,88 @@
+﻿<!--Navagation Bar - Primary -->
+<div ng-include="'/1.1.1/html/components/navbar_admin.html'"></div>
+<div class="layout_main_admin">
+    <div class="layout_wrapper">
+        <div class="layout_full">
+            <div class="layout_full_title">Admin User Import</div>
+            <div class="layout_full_text">To import users, click to select a .csv (comma seperated value) file of email addresses and then click upload.</div>
+           
+            <div style="clear: both;"></div>
+            
+            <div style="float:right;width:250px;font-size:14px;background-color:#ECEBFF;padding:10px;border:1px solid #333;border-radius:5px">
+                <div>Maximum users on account: {{userlimit}}</div>
+                <div>Current number of users: {{orgusers.length}}</div>           
+            </div>
+            
+            <a href="/adminusers/" title="To User Management">
+                <div class="admin_users_button">To User Management</div>
+            </a>
+            <div style="clear:both;height:10px;"></div>
+            <form role="form" class="form-horizontal" name="uploadCsvForm" method="post" enctype="multipart/form-data" ng-hide="ui.uploadform" novalidate>
+
+                <span style="font-size:14px;">Select User Import Type</span>
+                <div class="tooltip">
+                    <img src="/1.1.1/img/icon_info.png" style="width:15px;vertical-align:middle;">
+                    <span class="tooltiptext">Using Comma Seperated Values (.csv), you can mass import users by just their email, or their full user details.</span>
+                </div> 
+                
+                <div style="clear:both;height:3px;"></div>
+                <input type="radio" ng-model="import.type" value="emailonly">Email Only Import
+                &nbsp;&nbsp;&nbsp;
+                <input type="radio" ng-model="import.type" value="all">Full Import
+
+                <div style="clear:both;height:10px;"></div>
+
+                <div ng-show="import.type=='emailonly'" style="width:500px;font-size:14px;background-color:#FFFBDE;padding:0px 10px 0px 10px;border:1px solid #333;border-radius:5px">
+                    <p>This option imports users from a comma seperated list of email addresses. Other details can be edited individually later.</p>
+
+                </div>
+
+                <div ng-show="import.type=='all'" style="width:500px;font-size:14px;background-color:#FFFBDE;padding:0px 10px 0px 10px;border:1px solid #333;border-radius:5px">
+                    <p>This option imports users from a comma seperated list of email addresses, first names, last names, and reports to fields. The .csv file must have as it's first line a header exactly like the following:</p>
+                    <p><em><strong>email,firstname,lastname,reportsto</strong></em></p>
+                    <p>The following lines should be formatted like this:</p>
+                    <p><em><strong>johndoe@company.com, John, Doe, johnsboss@company.com</strong></em></p>
+                    <p>If you are missing some data, it's not a problem. As long as the comma seperated space is there, and the row has a valid email address.</p>
+                    <p><a href="/1.1.1/files/userimport_template.csv" target="_self" title="User Import Template">
+                    [Download Example CSV Template]
+                    </a></p>
+                </div>
+
+                <div style="clear:both; height:20px;"></div>            
+                
+                <!--<input type="file" class="form-control" id="csvImport" placeholder="CSV file with emails" required accept=".csv" ng-disabled="maxusers()">-->
+                <input class="ng-hide" id="csvImport" multiple type="file" ng-model="prd.bulk_direct_file" required accept=".csv" ng-disabled="maxusers()" onchange="angular.element(this).scope().fileloaded()"/>
+                <label for="csvImport" class="md-button md-raised md-primary">Select .CSV File</label>
+
+                <button type="submit" class="md-button md-raised" data-ng-click="readcsv(uploadCsvForm)" ng-disabled="maxusers()" ng-hide="ui.btnupload">Preview</button>
+
+            </form>
+            <div style="clear:both; height:20px;"></div>
+            <div id="divconfirmimport" ng-hide="divconfirm">
+                <div style="font-size:20px;margin-bottom:10px;">Preview Import Data</div>
+                
+                <table>
+                    <tr>
+                        <td style="border:1px solid #B3B9CF;background-color:#686B78;color:#E7F2FF;padding:3px;padding-right:50px;font-size:14px;">Email</td>
+                        <td style="border:1px solid #B3B9CF;background-color:#686B78;color:#E7F2FF;padding:3px;padding-right:50px;font-size:14px;">First Name</td>
+                        <td style="border:1px solid #B3B9CF;background-color:#686B78;color:#E7F2FF;padding:3px;padding-right:50px;font-size:14px;">Last Name</td>
+                        <td style="border:1px solid #B3B9CF;background-color:#686B78;color:#E7F2FF;padding:3px;padding-right:50px;font-size:14px;">Reports To (email address)</td>
+                    </tr>
+                    <tr ng-repeat="(key,value) in importedusers">
+                        <td style="border:1px solid #B3B9CF;padding:3px;padding-right:50px;font-size:14px;">{{value.email}}<span style="color:red;font-size:14px;" ng-show="value.valid">* invalid email</span></td>
+                        <td style="border:1px solid #B3B9CF;padding:3px;padding-right:50px;font-size:14px;">{{value.firstname}}</td>
+                        <td style="border:1px solid #B3B9CF;padding:3px;padding-right:50px;font-size:14px;">{{value.lastname}}</td>
+                        <td style="border:1px solid #B3B9CF;padding:3px;padding-right:50px;font-size:14px;">{{value.reportsto}}</td>
+                    </tr>
+                </table>
+                          
+                <div style="clear:both; height:20px;"></div>                
+                <button type="submit" class="md-button md-raised md-primary" ng-disabled="maxusers()" ng-click="submit()">Confirm User Import</button>
+                <md-button ng-click="cancel()" class="md-raised md-warn">CANCEL</md-button>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both; height:50px;"></div>
+</div>
+<!--Footer-->
+<div ng-include="'/1.1.1/html/components/footer.html'"></div>
